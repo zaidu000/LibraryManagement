@@ -14,8 +14,8 @@ import java.util.Properties;
 public class EmailUtil {
 
     public static void sendEmail(String to, String subject, String content) throws MessagingException {
-        final String from = "your_email@gmail.com"; 
-        final String password = "your_app_password";
+        final String from = "jainsahabparas678@gmail.com"; 
+        final String password = "onywlkwbwwqmtnxj";
 
         Properties prop = new Properties();
         prop.put("mail.smtp.host", "smtp.gmail.com");

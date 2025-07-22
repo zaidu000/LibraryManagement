@@ -5,7 +5,7 @@ public class Admin {
     private String libraryName;
     private String address;
     private String email;
-    private String role;
+    private String role;    
     private String password;
     private String membershipNo;
 

@@ -1,6 +1,8 @@
 package com.library.controller;
 
 import com.library.utility.DBConnection;
+import com.library.utility.EmailUtil;
+import com.library.utility.PasswordUtil;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -18,41 +20,57 @@ public class RegisterServlet extends HttpServlet {
         String name = request.getParameter("name");
         String email = request.getParameter("email");
         String password = request.getParameter("password");
-        String library = request.getParameter("library");
+        String libraryName = request.getParameter("libraryName");
         String address = request.getParameter("address");
-        String membershipNo = role.substring(0, 3).toUpperCase() + System.currentTimeMillis() + (int) (Math.random() * 1000);
+        String hashedPassword = null;
+        try {
+            hashedPassword = PasswordUtil.hashPassword(password);
+        } catch (Exception e) {
+            e.printStackTrace(); 
+            request.setAttribute("error", "Error hashing password");
+            request.getRequestDispatcher("registerAdmin.jsp").forward(request, response);
+            return;
+        }
+
+        String membershipNo = "LIB" + System.currentTimeMillis() % 1000000 + (int) (Math.random() * 1000);
 
         try (Connection con = DBConnection.getConnection()) {
+            if(con == null){
+                throw new RuntimeException("Database connection failed!");
+            }
             PreparedStatement ps;
             if ("admin".equals(role)) {
-                ps = con.prepareStatement("insert into admin(name,library_name,address,email,role,password,membershipNo) values(?,?,?,?,?,?,?)");
+                ps = con.prepareStatement("insert into admin(name,libraryName,address,email,password,membershipNo,role) values(?,?,?,?,?,?,?)");
                 ps.setString(1, name);
-                ps.setString(2, library);
+                ps.setString(2, libraryName);
                 ps.setString(3, address);
                 ps.setString(4, email);
-                ps.setString(5, role);
-                ps.setString(6, password);
-                ps.setString(7, membershipNo);
+                ps.setString(5, hashedPassword);
+                ps.setString(6, membershipNo);
+                ps.setString(7, role);
             } else {
-                ps = con.prepareStatement("insert into student(name,email,role,password,membershipNo) values(?,?,?,?,?)");
+                ps = con.prepareStatement("insert into student(name,email,password,membershipNo,role) values(?,?,?,?,?)");
                 ps.setString(1, name);
                 ps.setString(2, email);
-                ps.setString(3, role);
-                ps.setString(4, password);
-                ps.setString(5, membershipNo);
+                ps.setString(3, hashedPassword);
+                ps.setString(4, membershipNo);
+                ps.setString(5, role);
             }
             int i = ps.executeUpdate();
             if (i > 0) {
+                String subject = "Library Registration successfully";
+                String msg = "Hi " + name + ",\n\nYour MembershipNo is: " + membershipNo + "\nPassword: " + password + "\n\nThank You";
+                EmailUtil.sendEmail(email, subject, msg);
                 request.setAttribute("message", "Registered successfully with email: " + email);
                 request.getRequestDispatcher("login.jsp").forward(request, response);
             } else {
-                request.setAttribute("error", "Registrartion failed");
-                request.getRequestDispatcher("register.jsp").forward(request, response);
+                request.setAttribute("error", "Registration failed");
+                request.getRequestDispatcher("index.jsp").forward(request, response);
             }
 
         } catch (Exception e) {
             request.setAttribute("error", "Error: " + e.getMessage());
-            request.getRequestDispatcher("register.jsp").forward(request, response);
+            request.getRequestDispatcher("index.jsp").forward(request, response);
         }
 
     }

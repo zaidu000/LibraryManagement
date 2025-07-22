@@ -1,6 +1,7 @@
 package com.library.controller;
 
 import com.library.utility.DBConnection;
+import com.library.utility.PasswordUtil;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -21,10 +22,11 @@ public class LoginServlet extends HttpServlet {
         String role = request.getParameter("role");
         try(Connection con = DBConnection.getConnection()){
             String table = "admin".equals(role) ? "admin" : "student";
-            String query = "select * from " + table + "where membershipNo=? and password=?";
+            String hashedPassword = PasswordUtil.hashPassword(password);
+            String query = "select * from " + table + " where membershipNo=? and password=?";
             PreparedStatement ps = con.prepareStatement(query);
             ps.setString(1, membershipNo);
-            ps.setString(2, password);
+            ps.setString(2, hashedPassword);
             ResultSet rs = ps.executeQuery();
             if(rs.next()){
                 HttpSession session = request.getSession();
@@ -32,9 +34,9 @@ public class LoginServlet extends HttpServlet {
                 session.setAttribute("role", role);
                 session.setAttribute("name", rs.getString("name"));
                 if("admin".equals(role)){
-                    response.sendRedirect("admin/dashboard.jsp");
+                    response.sendRedirect("adminDashboard.jsp");
                 }else{
-                    response.sendRedirect("student/dashboard.jsp");
+                    response.sendRedirect("studentDashboard.jsp");
                 }
             }else{
                 request.setAttribute("error", "Invalid membershipNo or password");
@@ -42,7 +44,7 @@ public class LoginServlet extends HttpServlet {
             }
         }catch(Exception e){
             request.setAttribute("error", "Error: "+e.getMessage());
-            request.getRequestDispatcher("login.jsp").forward(request, response);
+            request.getRequestDispatcher("index.jsp").forward(request, response);
         }
     }
 }
