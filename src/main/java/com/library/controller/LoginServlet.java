@@ -21,8 +21,8 @@ public class LoginServlet extends HttpServlet {
         String password = request.getParameter("password");
         String role = request.getParameter("role");
         try(Connection con = DBConnection.getConnection()){
-            String table = "admin".equals(role) ? "admin" : "student";
             String hashedPassword = PasswordUtil.hashPassword(password);
+            String table = "admin".equals(role) ? "admin" : "student";
             String query = "select * from " + table + " where membershipNo=? and password=?";
             PreparedStatement ps = con.prepareStatement(query);
             ps.setString(1, membershipNo);
