@@ -12,6 +12,26 @@
         <servlet-name>LogoutServlet</servlet-name>
         <servlet-class>com.library.controller.LogoutServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AddBookServlet</servlet-name>
+        <servlet-class>com.library.controller.AddBookServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteBookServlet</servlet-name>
+        <servlet-class>com.library.controller.DeleteBookServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewBookServlet</servlet-name>
+        <servlet-class>com.library.controller.ViewBookServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>IssueBookServlet</servlet-name>
+        <servlet-class>com.library.controller.IssueBookServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditBookServlet</servlet-name>
+        <servlet-class>com.library.controller.EditBookServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegisterServlet</servlet-name>
         <url-pattern>/RegisterServlet</url-pattern>
@@ -23,6 +43,26 @@
     <servlet-mapping>
         <servlet-name>LogoutServlet</servlet-name>
         <url-pattern>/LogoutServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddBookServlet</servlet-name>
+        <url-pattern>/AddBookServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteBookServlet</servlet-name>
+        <url-pattern>/DeleteBookServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewBookServlet</servlet-name>
+        <url-pattern>/ViewBookServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>IssueBookServlet</servlet-name>
+        <url-pattern>/IssueBookServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditBookServlet</servlet-name>
+        <url-pattern>/EditBookServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

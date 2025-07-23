@@ -1,9 +1,15 @@
-com\library\utility\EmailUtil.class
 com\library\model\Admin.class
 com\library\utility\EmailUtil$1.class
 com\library\controller\RegisterServlet.class
+com\library\controller\IssueBookServlet.class
+com\library\controller\AddBookServlet.class
+com\library\controller\DeleteBookServlet.class
+com\library\model\Student.class
+com\library\model\Book.class
+com\library\utility\EmailUtil.class
 com\library\controller\LoginServlet.class
 com\library\controller\LogoutServlet.class
-com\library\model\Student.class
+com\library\controller\EditBookServlet.class
 com\library\utility\PasswordUtil.class
 com\library\utility\DBConnection.class
+com\library\controller\ViewBookServlet.class
