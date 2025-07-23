@@ -47,10 +47,10 @@
             <!-- Buttons Section -->
             <div class="d-flex flex-wrap justify-content-center btn-section mt-5">
                 <a href="addBook.jsp" class="btn btn-primary">Add Book</a>
-                <a href="viewBooks.jsp" class="btn btn-success">View Books</a>
-                <a href="deleteBook.jsp" class="btn btn-danger">Delete Book</a>
-                <a href="updateBook.jsp" class="btn btn-warning">Update/Edit Book</a>
-                <a href="viewIssuedBooks.jsp" class="btn btn-info">View Issued Books</a>
+                <a href="ViewBookServlet" class="btn btn-warning">Perform Actions</a>
+<!--                <a href="ViewBookServlet" class="btn btn-danger">Delete Book</a>
+                <a href="ViewBookServlet" class="btn btn-warning">Update/Edit Book</a>-->
+                <a href="viewIssuedBook.jsp" class="btn btn-info">View Issued Books</a>
             </div>
         </div>
 

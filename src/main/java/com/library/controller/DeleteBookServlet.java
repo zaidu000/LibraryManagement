@@ -14,12 +14,12 @@ public class DeleteBookServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        int id = Integer.parseInt(request.getParameter("id"));
+        int bookId = Integer.parseInt(request.getParameter("bookId"));
         try(Connection con = DBConnection.getConnection()){
-            PreparedStatement ps = con.prepareStatement("delete from book where id=?");
-            ps.setInt(1, id);
+            PreparedStatement ps = con.prepareStatement("delete from book where bookId=?");
+            ps.setInt(1, bookId);
             ps.executeUpdate();
-            response.sendRedirect("viewBooks.jsp");
+            response.sendRedirect("ViewBookServlet");
         }catch(Exception e){
             request.setAttribute("error", "Error: "+e.getMessage());
             request.getRequestDispatcher("adminDashboard.jsp").forward(request, response);

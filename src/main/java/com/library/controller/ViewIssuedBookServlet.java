@@ -21,13 +21,13 @@ public class ViewIssuedBookServlet extends HttpServlet {
             throws ServletException, IOException {
         List<Map<String, String>> issuedBooks = new ArrayList<>();
         try(Connection con = DBConnection.getConnection()){
-            String query = "select b.name as BookName,s.name as StudentName, ib.issue_date as IssueDate from issued_book JOIN book ib.book_id = b.id JOIN student ib.membershipNo = s.membershipNo";
+            String query = "select b.name as BookName,s.name as StudentName, ib.issueDate from issuedBook ib JOIN book b on ib.bookId = b.bookId JOIN student s on ib.membershipNo = s.membershipNo";
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery(query);
             while(rs.next()){
                 Map<String,String> record = new HashMap<>();
                 record.put("bookName",rs.getString("name"));
-                record.put("studentName",rs.getString("studentName"));
+                record.put("studentName",rs.getString("studentName"));  
                 record.put("issueDate",rs.getString("issueDate"));
                 issuedBooks.add(record);
             }

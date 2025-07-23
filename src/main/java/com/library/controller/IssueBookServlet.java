@@ -14,10 +14,10 @@ public class IssueBookServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        int bookId = Integer.parseInt(request.getParameter("id"));
+        int bookId = Integer.parseInt(request.getParameter("bookId"));
         String membershipNo = request.getParameter("membershipNo");
         try(Connection con = DBConnection.getConnection()){
-            PreparedStatement ps = con.prepareStatement("insert into issued_book(id,membershipNo) values(?,?)");
+            PreparedStatement ps = con.prepareStatement("insert into issuedBook(bookId,membershipNo,issueDate) values(?,?,NOW())");
             ps.setInt(1, bookId);
             ps.setString(2, membershipNo);
             ps.executeUpdate();

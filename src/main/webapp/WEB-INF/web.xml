@@ -36,6 +36,10 @@
         <servlet-name>ViewIssuedBookServlet</servlet-name>
         <servlet-class>com.library.controller.ViewIssuedBookServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>GetBookForEditServlet</servlet-name>
+        <servlet-class>com.library.controller.GetBookForEditServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegisterServlet</servlet-name>
         <url-pattern>/RegisterServlet</url-pattern>
@@ -71,6 +75,10 @@
     <servlet-mapping>
         <servlet-name>ViewIssuedBookServlet</servlet-name>
         <url-pattern>/ViewIssuedBookServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetBookForEditServlet</servlet-name>
+        <url-pattern>/GetBookForEditServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
