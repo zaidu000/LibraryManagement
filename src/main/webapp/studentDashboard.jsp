@@ -45,7 +45,7 @@
 
             <div class="d-flex flex-wrap justify-content-center btn-section mt-5">
                 <a href="booksIssued.jsp" class="btn btn-primary">📄 Books Issued</a>
-                <a href="searchBooks.jsp" class="btn btn-success">🔍 Search Books</a>
+                <a href="searchBook.jsp" class="btn btn-success">🔍 Search Books</a>
                 <a href="issueBook.jsp" class="btn btn-info">📥 Issue Book</a>
                 <a href="renewBook.jsp" class="btn btn-warning">♻️ Renew Book</a>
                 <a href="returnBook.jsp" class="btn btn-danger">📤 Return Book</a>

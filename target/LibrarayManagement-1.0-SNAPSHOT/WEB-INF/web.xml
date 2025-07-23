@@ -40,6 +40,26 @@
         <servlet-name>GetBookForEditServlet</servlet-name>
         <servlet-class>com.library.controller.GetBookForEditServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ViewIssuedBookStudentServlet</servlet-name>
+        <servlet-class>com.library.controller.ViewIssuedBookStudentServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SearchBookServlet</servlet-name>
+        <servlet-class>com.library.controller.SearchBookServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>StudentIssueBookServlet</servlet-name>
+        <servlet-class>com.library.controller.StudentIssueBookServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RenewBookServlet</servlet-name>
+        <servlet-class>com.library.controller.RenewBookServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ReturnBookServlet</servlet-name>
+        <servlet-class>com.library.controller.ReturnBookServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegisterServlet</servlet-name>
         <url-pattern>/RegisterServlet</url-pattern>
@@ -79,6 +99,26 @@
     <servlet-mapping>
         <servlet-name>GetBookForEditServlet</servlet-name>
         <url-pattern>/GetBookForEditServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewIssuedBookStudentServlet</servlet-name>
+        <url-pattern>/ViewIssuedBookStudentServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchBookServlet</servlet-name>
+        <url-pattern>/SearchBookServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>StudentIssueBookServlet</servlet-name>
+        <url-pattern>/StudentIssueBookServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RenewBookServlet</servlet-name>
+        <url-pattern>/RenewBookServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ReturnBookServlet</servlet-name>
+        <url-pattern>/ReturnBookServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
