@@ -29,7 +29,7 @@ public class RenewBookServlet extends HttpServlet {
             ResultSet rs = ps1.executeQuery();
             if(!rs.next()){
                 request.setAttribute("error", "Issued book not found");
-                request.getRequestDispatcher("studentDashboard.jsp").forward(request, response);
+                request.getRequestDispatcher("viewAndRenewIssuedBook.jsp").forward(request, response);
                 return;
             }
             int bookId = rs.getInt("bookId");
@@ -39,12 +39,12 @@ public class RenewBookServlet extends HttpServlet {
             LocalDate today = LocalDate.now();
             if(currentDue.isBefore(today)){
                 request.setAttribute("error", "Cannot renew, book is already overdue");
-                request.getRequestDispatcher("studentDashboard.jsp").forward(request, response);
+                request.getRequestDispatcher("viewAndRenewIssuedBook.jsp").forward(request, response);
                 return;
             }
             if(renewCount >= MAX_RENEWAL){
                 request.setAttribute("error", "You reached the maximum renewals");
-                request.getRequestDispatcher("studentDashboard.jsp").forward(request, response);
+                request.getRequestDispatcher("viewAndRenewIssuedBook.jsp").forward(request, response);
                 return;
             }
             PreparedStatement ps2 = con.prepareStatement("select * from reservation where bookId = ? and membershipNo != ?");
@@ -53,7 +53,7 @@ public class RenewBookServlet extends HttpServlet {
             ResultSet rs2 = ps2.executeQuery();
             if(rs2.next()){
                 request.setAttribute("error", "This book is reserved by any other one, you can't be renew this book");
-                request.getRequestDispatcher("studentDashboard.jsp").forward(request, response);
+                request.getRequestDispatcher("viewAndRenewIssuedBook.jsp").forward(request, response);
                 return;
             }
             LocalDate newDueDate = currentDue.plusDays(RENEW_DAY);
@@ -62,7 +62,7 @@ public class RenewBookServlet extends HttpServlet {
             ps3.setInt(2, id);
             ps3.executeUpdate();
             request.setAttribute("message", "Book Renewed Successfully with new due date: "+newDueDate);
-            request.getRequestDispatcher("studentDashboard.jsp").forward(request, response);
+            request.getRequestDispatcher("viewAndRenewIssuedBook.jsp").forward(request, response);
         }catch(Exception e){
             request.setAttribute("error", "Error: "+e.getMessage());
             request.getRequestDispatcher("studentDashboard.jsp").forward(request, response);

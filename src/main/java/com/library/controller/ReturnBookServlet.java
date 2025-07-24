@@ -26,7 +26,7 @@ public class ReturnBookServlet extends HttpServlet {
             ResultSet rs1 = ps1.executeQuery();
             if(!rs1.next()){
                 request.setAttribute("error", "Issued book not found!!!");
-                request.getRequestDispatcher("studentDashboard.jsp").forward(request, response);
+                request.getRequestDispatcher("viewAndRenewIssuedBook.jsp").forward(request, response);
                 return;
             }
             int bookId = rs1.getInt("bookId");
@@ -36,6 +36,7 @@ public class ReturnBookServlet extends HttpServlet {
             PreparedStatement ps3 = con.prepareStatement("update book set quantity = quantity+1 where bookId=?");
             ps3.setInt(1, bookId);
             ps3.executeUpdate();
+            String message = "Book returned successfully";
             PreparedStatement ps4 = con.prepareStatement("select * from reservation where bookId=? ORDER BY reservedDate ASC LIMIT 1");
             ps4.setInt(1, bookId);
             ResultSet rs2 = ps4.executeQuery();
@@ -54,10 +55,14 @@ public class ReturnBookServlet extends HttpServlet {
                 delps.setInt(1, bookId);
                 delps.setString(2, reservedFor);
                 delps.executeUpdate();
+                
+                message += " and issued to the next reserved student.";
             }
             
-            request.setAttribute("message", "Book returned successfully");
-            request.getRequestDispatcher("studentDashboard.jsp").forward(request, response);
+            request.setAttribute("message", message);
+            
+            //request.getRequestDispatcher("studentDashboard.jsp").forward(request, response);
+            request.getRequestDispatcher("viewAndRenewIssuedBook.jsp").forward(request, response);
         }catch(Exception e){
             request.setAttribute("error", "Error: "+e.getMessage());
             request.getRequestDispatcher("studentDashboard.jsp").forward(request, response);

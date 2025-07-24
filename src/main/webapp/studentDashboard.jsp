@@ -47,13 +47,10 @@
             <h2 class="text-center">Welcome, <%= studentName%> 📚</h2>
 
             <div class="d-flex flex-wrap justify-content-center btn-section mt-5">
-                <a href="ViewIssuedBookStudentServlet" class="btn btn-primary">📄 Books Issued</a>
-                <a href="searchBook.jsp" class="btn btn-success">🔍 Search Books</a>
-                <a href="StudentIssueBookServlet" class="btn btn-info">📥 Issue Book</a>
-                <a href="viewAndRenewIssuedBook.jsp" class="btn btn-warning">♻️ Renew Book</a>
-                <a href="returnBook.jsp" class="btn btn-danger">📤 Return Book</a>
+                <a href="ViewIssuedBookStudentServlet" class="btn btn-primary">📄 View,♻ Renew & 📤 Return book</a>
+                <a href="searchBook.jsp" class="btn btn-success">🔍 Search,📥 Issue and 📄Reserve Books</a>
                 <a href="ViewReservationServlet" class="btn btn-info">My Reservations</a>
             </div>
-        </div>s
+        </div>
     </body>
 </html>

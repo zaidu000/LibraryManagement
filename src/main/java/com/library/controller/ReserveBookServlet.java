@@ -23,18 +23,20 @@ public class ReserveBookServlet extends HttpServlet {
             ps.setString(2, membershipNo);
             ResultSet rs = ps.executeQuery();
             if(rs.next()){
-                request.setAttribute("error", "You have already reserved this book");
+                request.getSession().setAttribute("error", "You have already reserved this book");
             }else{
                 PreparedStatement ps2 = con.prepareStatement("insert into reservation(bookId, membershipNo, reservedDate) values(?,?,NOW())");
                 ps2.setInt(1, bookId);
                 ps2.setString(2, membershipNo);
                 ps2.executeUpdate();
-                request.setAttribute("message","Book reserved successfully");
+                request.getSession().setAttribute("message","Book reserved successfully");
             }
-            request.getRequestDispatcher("studentDashboard.jsp").forward(request, response);
+            //request.getRequestDispatcher("studentDashboard.jsp").forward(request, response);
+            response.sendRedirect("studentDashboard.jsp");
         }catch(Exception e){
-            request.setAttribute("error", "Error: "+e.getMessage());
-            request.getRequestDispatcher("studentDashboard.jsp").forward(request, response);
+            request.getSession().setAttribute("error", "Error: "+e.getMessage());
+            //request.getRequestDispatcher("studentDashboard.jsp").forward(request, response);
+            response.sendRedirect("studentDashboard.jsp");
         }
     }
 }

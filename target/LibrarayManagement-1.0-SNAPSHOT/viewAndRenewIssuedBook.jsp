@@ -3,7 +3,7 @@
 
 <html>
     <head>
-        <title>Issued Books & Renew</title>
+        <title>Actions</title>
         <style>
             table {
                 border-collapse: collapse;
@@ -34,6 +34,10 @@
         </style>
     </head>
     <body>
+        <%
+            String message = (String) request.getAttribute("message");
+            String error = (String) request.getAttribute("error");
+        %>
 
         <h2 style="text-align:center;">My Issued Books</h2>
 
@@ -69,6 +73,10 @@
                             <form method="post" action="RenewBookServlet">
                                 <input type="hidden" name="id" value="${book.id}" />
                                 <button type="submit">Renew</button>
+                            </form>
+                            <form method="post" action="ReturnBookServlet" style="display:inline; margin-left: 10px;">
+                                <input type="hidden" name="id" value="${book.id}" />
+                                <button type="submit">Return</button>
                             </form>
                         </td>
                     </tr>
