@@ -26,9 +26,13 @@ public class AddBookServlet extends HttpServlet {
             ps.setString(3, edition);
             ps.setInt(4, quantity);
             ps.setString(5,parkingSlot);
-            ps.executeUpdate();
-            response.sendRedirect("addBook.jsp");
-            request.setAttribute("message", "Book is added succesfully");
+            int result = ps.executeUpdate();
+            if(result > 0){
+                request.setAttribute("message", "Book added successfully");
+            }else{
+                request.setAttribute("error","Failed to add book");
+            }
+            request.getRequestDispatcher("addBook.jsp").forward(request, response);
         }catch(Exception e){
             request.setAttribute("error", "Error: "+e.getMessage());
             request.getRequestDispatcher("adminDashboard.jsp").forward(request, response);

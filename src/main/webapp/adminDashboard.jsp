@@ -2,6 +2,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
 <%
+    response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1
+    response.setHeader("Pragma", "no-cache"); // HTTP 1.0
+    response.setDateHeader("Expires", 0); // Proxies
     String adminName = (String) session.getAttribute("name");
     if (adminName == null) {
         response.sendRedirect("login.jsp");
@@ -48,8 +51,6 @@
             <div class="d-flex flex-wrap justify-content-center btn-section mt-5">
                 <a href="addBook.jsp" class="btn btn-primary">Add Book</a>
                 <a href="ViewBookServlet" class="btn btn-warning">Perform Actions</a>
-<!--                <a href="ViewBookServlet" class="btn btn-danger">Delete Book</a>
-                <a href="ViewBookServlet" class="btn btn-warning">Update/Edit Book</a>-->
                 <a href="ViewIssuedBookServlet" class="btn btn-info">View Issued Books</a>
             </div>
         </div>
