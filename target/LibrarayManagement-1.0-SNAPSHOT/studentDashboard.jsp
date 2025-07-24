@@ -47,7 +47,7 @@
                 <a href="ViewIssuedBookStudentServlet" class="btn btn-primary">📄 Books Issued</a>
                 <a href="searchBook.jsp" class="btn btn-success">🔍 Search Books</a>
                 <a href="StudentIssueBookServlet" class="btn btn-info">📥 Issue Book</a>
-                <a href="renewBook.jsp" class="btn btn-warning">♻️ Renew Book</a>
+                <a href="viewAndRenewIssuedBook.jsp" class="btn btn-warning">♻️ Renew Book</a>
                 <a href="returnBook.jsp" class="btn btn-danger">📤 Return Book</a>
             </div>
         </div>
