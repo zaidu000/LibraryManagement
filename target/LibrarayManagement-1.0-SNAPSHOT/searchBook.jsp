@@ -50,11 +50,15 @@
                             <% if (book.getQuantity() > 0) {%>
                             <form action="StudentIssueBookServlet" method="post">
                                 <input type="hidden" name="bookId" value="<%= book.getBookId()%>">
-                                <input type="hidden" name="membershipNo" value="<%= session.getAttribute("membershipNo") %>">
+                                <input type="hidden" name="membershipNo" value="<%= session.getAttribute("membershipNo")%>">
                                 <button type="submit" class="btn btn-success btn-sm">Issue</button>
                             </form>
-                            <% } else { %>
-                            <span class="text-danger">Not Available</span>
+                            <% } else {%>
+                            <form action="ReserveBookServlet" method="post">
+                                <input type="hidden" name="bookId" value="<%= book.getBookId()%>">
+                                <input type="hidden" name="membershipNo" value="<%= session.getAttribute("membershipNo")%>">
+                                <button type="submit" class="btn btn-warning btn-sm">Reserve</button>
+                            </form>
                             <% } %>
                         </td>
                     </tr>
