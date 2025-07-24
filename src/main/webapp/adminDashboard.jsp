@@ -50,7 +50,7 @@
                 <a href="ViewBookServlet" class="btn btn-warning">Perform Actions</a>
 <!--                <a href="ViewBookServlet" class="btn btn-danger">Delete Book</a>
                 <a href="ViewBookServlet" class="btn btn-warning">Update/Edit Book</a>-->
-                <a href="viewIssuedBook.jsp" class="btn btn-info">View Issued Books</a>
+                <a href="ViewIssuedBookServlet" class="btn btn-info">View Issued Books</a>
             </div>
         </div>
 

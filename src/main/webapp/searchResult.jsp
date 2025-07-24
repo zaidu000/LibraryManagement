@@ -41,8 +41,9 @@
                         <td><%= book.getParkingSlot()%></td>
                         <td>
                             <% if (book.getQuantity() > 0) {%>
-                            <form action="IssueBookServlet" method="post">
+                            <form action="StudentIssueBookServlet" method="post">
                                 <input type="hidden" name="bookId" value="<%= book.getBookId()%>">
+                                <input type="hidden" name="membershipNo" value="<%= session.getAttribute("membershipNo") %>">
                                 <button type="submit" class="btn btn-success btn-sm">Issue</button>
                             </form>
                             <% } else { %>
