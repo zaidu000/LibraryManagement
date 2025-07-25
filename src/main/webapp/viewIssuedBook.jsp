@@ -20,6 +20,7 @@
                     <th>Book Name</th>
                     <th>Student Name</th>
                     <th>Issue Date</th>
+                    <th>Due Date</th>
                 </tr>
             </thead>
             <tbody>
@@ -28,6 +29,7 @@
                         <td><%= book.get("bookName") %></td>
                         <td><%= book.get("studentName") %></td>
                         <td><%= book.get("issueDate") %></td>
+                        <td><%= book.get("dueDate") %></td>
                     </tr>
                 <% } %>
             </tbody>

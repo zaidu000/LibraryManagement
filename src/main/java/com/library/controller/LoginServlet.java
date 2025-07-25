@@ -39,7 +39,7 @@ public class LoginServlet extends HttpServlet {
                     response.sendRedirect("studentDashboard.jsp");
                 }
             }else{
-                request.setAttribute("error", "Invalid membershipNo or password");
+                request.setAttribute("error", "Invalid MembershipNumber or Password");
                 request.getRequestDispatcher("login.jsp").forward(request, response);
             }
         }catch(Exception e){

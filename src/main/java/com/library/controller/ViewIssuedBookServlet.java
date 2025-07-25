@@ -22,7 +22,7 @@ public class ViewIssuedBookServlet extends HttpServlet {
             throws ServletException, IOException {
         List<Map<String, String>> issuedBooks = new ArrayList<>();
         try (Connection con = DBConnection.getConnection()) {
-            String query = "select b.name as BookName,s.name as StudentName, ib.issueDate from issuedbook ib JOIN book b on ib.bookId = b.bookId JOIN student s on ib.membershipNo = s.membershipNo";
+            String query = "select b.name as BookName,s.name as StudentName, ib.issueDate, ib.dueDate from issuedbook ib JOIN book b on ib.bookId = b.bookId JOIN student s on ib.membershipNo = s.membershipNo";
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery(query);
             while (rs.next()) {
@@ -31,6 +31,8 @@ public class ViewIssuedBookServlet extends HttpServlet {
                 record.put("studentName", rs.getString("StudentName")); 
                 Timestamp issueTimestamp = rs.getTimestamp("issueDate");
                 record.put("issueDate", issueTimestamp.toString());
+                Timestamp dueTimestamp = rs.getTimestamp("dueDate");
+                record.put("dueDate", dueTimestamp.toLocalDateTime().toLocalDate().toString());
                 issuedBooks.add(record);
             }
             request.setAttribute("issuedBooks", issuedBooks);
