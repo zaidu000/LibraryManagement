@@ -43,7 +43,6 @@ public class ViewIssuedBookStudentServlet extends HttpServlet {
                 issuedBooks.add(book);
             }
             request.setAttribute("issuedBooks", issuedBooks);
-//            request.getRequestDispatcher("viewIssuedBookStudent.jsp").forward(request, response);
             request.getRequestDispatcher("viewAndRenewIssuedBook.jsp").forward(request, response);
         }catch(Exception e){
             request.setAttribute("error", "Error: "+e.getMessage());
