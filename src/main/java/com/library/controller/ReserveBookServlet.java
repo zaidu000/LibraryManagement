@@ -31,12 +31,10 @@ public class ReserveBookServlet extends HttpServlet {
                 ps2.executeUpdate();
                 request.getSession().setAttribute("message","Book reserved successfully");
             }
-            //request.getRequestDispatcher("studentDashboard.jsp").forward(request, response);
-            response.sendRedirect("studentDashboard.jsp");
+            response.sendRedirect("ViewReservationServlet");
         }catch(Exception e){
             request.getSession().setAttribute("error", "Error: "+e.getMessage());
-            //request.getRequestDispatcher("studentDashboard.jsp").forward(request, response);
-            response.sendRedirect("studentDashboard.jsp");
+            response.sendRedirect("ViewReservationServlet");
         }
     }
 }

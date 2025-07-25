@@ -24,11 +24,27 @@ public class StudentIssueBookServlet extends HttpServlet {
         
         try(Connection con = DBConnection.getConnection()){
             con.setAutoCommit(false);
+            PreparedStatement checkDuplicate = con.prepareStatement("select * from issuedbook where bookId=? and membershipNo=? AND returnDate IS NULL");
+            checkDuplicate.setInt(1, bookId);
+            checkDuplicate.setString(2,membershipNo);
+            ResultSet rsDuplicate = checkDuplicate.executeQuery();
+            if(rsDuplicate.next()){
+                request.setAttribute("error", "You have already issued this book and not return this book");
+                request.getRequestDispatcher("studentIssueBookResult.jsp").forward(request, response);
+            }
+            PreparedStatement countStmt = con.prepareStatement("select COUNT(*) from issuedbook where membershipNo=? and returnDate IS NULL");
+            countStmt.setString(1, membershipNo);
+            ResultSet rsCount = countStmt.executeQuery();
+            rsCount.next();
+            int bookCount = rsCount.getInt(1);
+            if(bookCount >= 3){
+                request.setAttribute("error", "You can issue a maximum of 3 books");
+                request.getRequestDispatcher("studentIssueBookResult.jsp").forward(request, response);
+            }
             PreparedStatement checkStmt = con.prepareStatement("select quantity from book where bookId=?");
             checkStmt.setInt(1, bookId);
             ResultSet rs = checkStmt.executeQuery();
             if((rs.next()) && (rs.getInt("quantity")>0)){
-                int quantity = rs.getInt("quantity");
                 PreparedStatement insertStmt = con.prepareStatement("insert into issuedbook(bookId,membershipNo,issueDate,dueDate,renewCount) values(?,?,?,?,0)");
                 LocalDate today = LocalDate.now();
                 LocalDate dueDate = today.plusDays(14);
@@ -36,8 +52,7 @@ public class StudentIssueBookServlet extends HttpServlet {
                 insertStmt.setString(2, membershipNo);
                 insertStmt.setTimestamp(3, Timestamp.valueOf(LocalDateTime.now()));
                 insertStmt.setDate(4, Date.valueOf(dueDate));
-                int rowsInserted = insertStmt.executeUpdate();
-                System.out.println("Row updated in insert: "+rowsInserted);
+                insertStmt.executeUpdate();
                 
                 PreparedStatement updateStmt = con.prepareStatement("update book set quantity = quantity - 1 where bookId=?");
                 updateStmt.setInt(1, bookId);

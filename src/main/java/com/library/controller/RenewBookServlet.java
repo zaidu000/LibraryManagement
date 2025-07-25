@@ -30,7 +30,6 @@ public class RenewBookServlet extends HttpServlet {
             if(!rs.next()){
                 request.setAttribute("error", "Issued book not found");
                 request.getRequestDispatcher("viewAndRenewIssuedBook.jsp").forward(request, response);
-                return;
             }
             int bookId = rs.getInt("bookId");
             Date dueDate = rs.getDate("dueDate");
@@ -40,12 +39,10 @@ public class RenewBookServlet extends HttpServlet {
             if(currentDue.isBefore(today)){
                 request.setAttribute("error", "Cannot renew, book is already overdue");
                 request.getRequestDispatcher("viewAndRenewIssuedBook.jsp").forward(request, response);
-                return;
             }
             if(renewCount >= MAX_RENEWAL){
                 request.setAttribute("error", "You reached the maximum renewals");
                 request.getRequestDispatcher("viewAndRenewIssuedBook.jsp").forward(request, response);
-                return;
             }
             PreparedStatement ps2 = con.prepareStatement("select * from reservation where bookId = ? and membershipNo != ?");
             ps2.setInt(1, bookId);
@@ -54,7 +51,6 @@ public class RenewBookServlet extends HttpServlet {
             if(rs2.next()){
                 request.setAttribute("error", "This book is reserved by any other one, you can't be renew this book");
                 request.getRequestDispatcher("viewAndRenewIssuedBook.jsp").forward(request, response);
-                return;
             }
             LocalDate newDueDate = currentDue.plusDays(RENEW_DAY);
             PreparedStatement ps3 = con.prepareStatement("update issuedbook set dueDate=?, renewCount=renewCount+1 where id=?");
@@ -65,7 +61,7 @@ public class RenewBookServlet extends HttpServlet {
             request.getRequestDispatcher("viewAndRenewIssuedBook.jsp").forward(request, response);
         }catch(Exception e){
             request.setAttribute("error", "Error: "+e.getMessage());
-            request.getRequestDispatcher("studentDashboard.jsp").forward(request, response);
+            request.getRequestDispatcher("viewAndRenewIssuedBook.jsp").forward(request, response);
         }
     }
 

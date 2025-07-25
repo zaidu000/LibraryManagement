@@ -27,7 +27,6 @@ public class ReturnBookServlet extends HttpServlet {
             if(!rs1.next()){
                 request.setAttribute("error", "Issued book not found!!!");
                 request.getRequestDispatcher("viewAndRenewIssuedBook.jsp").forward(request, response);
-                return;
             }
             int bookId = rs1.getInt("bookId");
             PreparedStatement ps2 = con.prepareStatement("delete from issuedbook where id=?");
@@ -60,12 +59,10 @@ public class ReturnBookServlet extends HttpServlet {
             }
             
             request.setAttribute("message", message);
-            
-            //request.getRequestDispatcher("studentDashboard.jsp").forward(request, response);
             request.getRequestDispatcher("viewAndRenewIssuedBook.jsp").forward(request, response);
         }catch(Exception e){
             request.setAttribute("error", "Error: "+e.getMessage());
-            request.getRequestDispatcher("studentDashboard.jsp").forward(request, response);
+            request.getRequestDispatcher("viewAndRenewIssuedBook.jsp").forward(request, response);
         }
     }
 }

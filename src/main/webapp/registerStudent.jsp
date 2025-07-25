@@ -33,8 +33,11 @@
                 <div class="mb-3">
                     <label for="password" class="form-label">Password:</label>
                     <input type="password" id="password" name="password" class="form-control"
-                           pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$"
-                           title="Must contain at least 8 characters, one uppercase, one lowercase, one number and one special character" required>
+                           pattern=".{8}"
+                           title="Must contain at least 8 characters" required>
+                    <button class="btn btn-outline-secondary" type="button" onclick="togglePasswordVisibility()">
+                        Show Password
+                    </button>
                 </div>
 
                 <button type="submit" class="btn btn-primary w-100">Register</button>
@@ -44,13 +47,18 @@
         <script>
             function validateForm() {
                 const password = document.getElementById("password").value;
-                const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$/;
-                if (!regex.test(password)) {
-                    alert("Password must be at least 8 characters long and include uppercase, lowercase, number, and special character.");
+                if (password.length < 8) {
+                    alert("Password must be at least 8 characters long.");
                     return false;
                 }
                 return true;
             }
+            function togglePasswordVisibility() {
+                const passwordInput = document.getElementById("password");
+                const type = passwordInput.getAttribute("type");
+                passwordInput.setAttribute("type", type === "password" ? "text" : "password");
+            }
+
         </script>
     </body>
 </html>
